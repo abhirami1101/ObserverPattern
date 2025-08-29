@@ -8,7 +8,9 @@ namespace Networking
 
         IMessageListener _listener;
 
+        // To store message type and listener mapping
         private readonly Dictionary<string, List<IMessageListener>> _listenersByType;
+
         public Communicator()
         {
             _watcher = new FileSystemWatcher();
@@ -58,6 +60,9 @@ namespace Networking
 
         public void Subscribe(IMessageListener listener)
         {
+            // the listener would be added,
+            // to the corresponding message type
+            // in the dictionary
             if (!_listenersByType.ContainsKey(listener.MessageType))
             {
                 _listenersByType[listener.MessageType] = new List<IMessageListener>();
